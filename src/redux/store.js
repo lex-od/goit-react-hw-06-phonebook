@@ -1,21 +1,37 @@
 import { createStore } from 'redux';
 
 const initialState = {
-    contacts: [],
-    filter: '',
+    contacts: {
+        items: [],
+        filter: '',
+    },
 };
 
 const reducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case 'App/addContact':
-            return { ...state, contacts: [payload, ...state.contacts] };
+            return {
+                ...state,
+                contacts: {
+                    ...state.contacts,
+                    items: [payload, ...state.contacts.items],
+                },
+            };
         case 'App/deleteContact':
             return {
                 ...state,
-                contacts: state.contacts.filter(({ id }) => id !== payload),
+                contacts: {
+                    ...state.contacts,
+                    items: state.contacts.items.filter(
+                        ({ id }) => id !== payload,
+                    ),
+                },
             };
         case 'App/changeFilter':
-            return { ...state, filter: payload };
+            return {
+                ...state,
+                contacts: { ...state.contacts, filter: payload },
+            };
         default:
             return state;
     }
