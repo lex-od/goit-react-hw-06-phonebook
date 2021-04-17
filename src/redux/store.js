@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const initialState = {
     contacts: {
@@ -37,6 +38,6 @@ const reducer = (state = initialState, { type, payload }) => {
     }
 };
 
-const store = createStore(reducer);
+const store = createStore(reducer, composeWithDevTools());
 
 export default store;
