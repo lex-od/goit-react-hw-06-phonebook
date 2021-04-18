@@ -16,5 +16,15 @@ const changeFilter = value => ({
     payload: value,
 });
 
-const phonebookActions = { addContact, deleteContact, changeFilter };
+const loadContacts = contacts => ({
+    type: actionTypes.LOAD_CONTACTS,
+    payload: contacts,
+});
+
+const phonebookActions = {
+    addContact,
+    deleteContact,
+    changeFilter,
+    loadContacts,
+};
 export default phonebookActions;

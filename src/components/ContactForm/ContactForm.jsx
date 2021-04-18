@@ -8,6 +8,13 @@ import phonebookActions from '../../redux/phonebook/phonebook-actions';
 class ContactForm extends Component {
     static propTypes = {
         dispSubmit: PropTypes.func.isRequired,
+        contacts: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                name: PropTypes.string.isRequired,
+                number: PropTypes.string.isRequired,
+            }),
+        ).isRequired,
     };
 
     state = {
@@ -23,10 +30,23 @@ class ContactForm extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
+        if (this.isContactExists()) {
+            alert(`Контакт "${this.state.name}" уже существует`);
+            return;
+        }
+
         this.props.dispSubmit(this.state);
 
         this.setState({ name: '', number: '' });
     };
+
+    isContactExists() {
+        const normName = this.state.name.toLowerCase();
+
+        return this.props.contacts.some(
+            ({ name }) => name.toLowerCase() === normName,
+        );
+    }
 
     render() {
         const { name, number } = this.state;
@@ -63,8 +83,12 @@ class ContactForm extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    contacts: state.contacts.items,
+});
+
 const mapDispatchToProps = dispatch => ({
     dispSubmit: contact => dispatch(phonebookActions.addContact(contact)),
 });
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

@@ -25,8 +25,8 @@ const getFilteredContacts = (contacts, filter) => {
     );
 };
 
-const dispatchStateToProps = ({ contacts: { items, filter } }) => ({
+const mapStateToProps = ({ contacts: { items, filter } }) => ({
     contacts: getFilteredContacts(items, filter),
 });
 
-export default connect(dispatchStateToProps)(ContactList);
+export default connect(mapStateToProps)(ContactList);
