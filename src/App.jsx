@@ -1,40 +1,25 @@
-import { connect } from 'react-redux';
+import { Component } from 'react';
 import css from './styles/App.module.scss';
-import * as actions from './redux/phonebook/phonebook-actions';
 
 // import ContactForm from './components/ContactForm';
 // import Filter from './components/Filter';
-// import ContactList from './components/ContactList';
+import ContactList from './components/ContactList';
 
-const App = () => {
-    // const { filter } = this.state;
-    // const filteredContacts = this.getFilteredContacts();
+class App extends Component {
+    render() {
+        // const { filter } = this.state;
 
-    return (
-        <div className="container">
-            <h1 className={css.telBookTitle}>Телефонная книга</h1>
-            {/* <ContactForm onSubmit={this.addContact} /> */}
+        return (
+            <div className="container">
+                <h1 className={css.telBookTitle}>Телефонная книга</h1>
+                {/* <ContactForm onSubmit={this.addContact} /> */}
 
-            <h2 className={css.contactsTitle}>Контакты</h2>
-            {/* <Filter value={filter} onChange={this.changeFilter} /> */}
-            {/* <ContactList
-                    contacts={filteredContacts}
-                    onDelete={this.deleteContact}
-                /> */}
-        </div>
-    );
-};
+                <h2 className={css.contactsTitle}>Контакты</h2>
+                {/* <Filter value={filter} onChange={this.changeFilter} /> */}
+                <ContactList />
+            </div>
+        );
+    }
+}
 
-const mapStateToProps = state => {
-    return {
-        contacts: state.contacts.items,
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        dispDeleteContact: id => dispatch(actions.deleteContact(id)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

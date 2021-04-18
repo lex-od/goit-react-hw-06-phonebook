@@ -1,16 +1,19 @@
 import actionTypes from './phonebook-types';
 
-export const addContact = contact => ({
+const addContact = contact => ({
     type: actionTypes.ADD_CONTACT,
     payload: contact,
 });
 
-export const deleteContact = id => ({
+const deleteContact = id => ({
     type: actionTypes.DELETE_CONTACT,
     payload: id,
 });
 
-export const changeFilter = value => ({
+const changeFilter = value => ({
     type: actionTypes.CHANGE_FILTER,
     payload: value,
 });
+
+const phonebookActions = { addContact, deleteContact, changeFilter };
+export default phonebookActions;

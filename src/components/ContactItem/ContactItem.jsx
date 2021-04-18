@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import css from './ContactItem.module.scss';
+import phonebookActions from '../../redux/phonebook/phonebook-actions';
 
-const ContactItem = ({ id, name, number, onDelete }) => (
+const ContactItem = ({ id, name, number, dispBtnClick }) => (
     <>
         <span className={css.name}>{name}: </span>
         <span className={css.number}>{number}</span>
@@ -9,7 +11,7 @@ const ContactItem = ({ id, name, number, onDelete }) => (
             className={css.deleteContact}
             type="button"
             onClick={() => {
-                onDelete(id);
+                dispBtnClick(id);
             }}
         >
             Удалить
@@ -21,7 +23,10 @@ ContactItem.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
-    onDelete: PropTypes.func.isRequired,
 };
 
-export default ContactItem;
+const mapDispatchToProps = dispatch => ({
+    dispBtnClick: id => dispatch(phonebookActions.deleteContact(id)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactItem);

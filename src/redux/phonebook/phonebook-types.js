@@ -1,6 +1,6 @@
-export const ADD_CONTACT = 'App/addContact';
-export const DELETE_CONTACT = 'App/deleteContact';
-export const CHANGE_FILTER = 'App/changeFilter';
+export const ADD_CONTACT = 'phonebook/addContact';
+export const DELETE_CONTACT = 'phonebook/deleteContact';
+export const CHANGE_FILTER = 'phonebook/changeFilter';
 
-const appTypes = { ADD_CONTACT, DELETE_CONTACT, CHANGE_FILTER };
-export default appTypes;
+const phonebookTypes = { ADD_CONTACT, DELETE_CONTACT, CHANGE_FILTER };
+export default phonebookTypes;
