@@ -1,13 +1,13 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import css from './styles/App.module.scss';
+import css from './styles/Phonebook.module.scss';
 import phonebookActions from './redux/phonebook/phonebook-actions';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
 
-class App extends Component {
+class Phonebook extends Component {
     static propTypes = {
         dispLoadContacts: PropTypes.func.isRequired,
         contacts: PropTypes.arrayOf(
@@ -57,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
         dispatch(phonebookActions.loadContacts(contacts)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Phonebook);

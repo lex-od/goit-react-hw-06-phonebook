@@ -1,13 +1,19 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import css from './ContactList.module.scss';
+import phonebookActions from '../../redux/phonebook/phonebook-actions';
 import ContactItem from '../ContactItem';
 
-const ContactList = ({ contacts }) => (
+const ContactList = ({ contacts, dispItemBtnClick }) => (
     <ul>
         {contacts.map(({ id, name, number }) => (
             <li className={css.contactItem} key={id}>
-                <ContactItem id={id} name={name} number={number} />
+                <ContactItem
+                    id={id}
+                    name={name}
+                    number={number}
+                    onBtnClick={dispItemBtnClick}
+                />
             </li>
         ))}
     </ul>
@@ -29,4 +35,8 @@ const mapStateToProps = ({ contacts: { items, filter } }) => ({
     contacts: getFilteredContacts(items, filter),
 });
 
-export default connect(mapStateToProps)(ContactList);
+const mapDispatchToProps = dispatch => ({
+    dispItemBtnClick: id => dispatch(phonebookActions.deleteContact(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
