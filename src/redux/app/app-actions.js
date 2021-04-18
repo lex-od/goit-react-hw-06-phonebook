@@ -1,14 +1,16 @@
+import actionTypes from './app-types';
+
 export const addContact = contact => ({
-    type: 'App/addContact',
+    type: actionTypes.ADD_CONTACT,
     payload: contact,
 });
 
 export const deleteContact = id => ({
-    type: 'App/deleteContact',
+    type: actionTypes.DELETE_CONTACT,
     payload: id,
 });
 
 export const changeFilter = value => ({
-    type: 'App/changeFilter',
+    type: actionTypes.CHANGE_FILTER,
     payload: value,
 });
