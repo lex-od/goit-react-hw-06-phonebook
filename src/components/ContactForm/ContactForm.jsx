@@ -1,14 +1,19 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import css from './ContactForm.module.scss';
 import config from '../../json/ContactFormConfig.json';
+import phonebookActions from '../../redux/phonebook/phonebook-actions';
 
 class ContactForm extends Component {
     static propTypes = {
-        onSubmit: PropTypes.func.isRequired,
+        dispSubmit: PropTypes.func.isRequired,
     };
 
-    state = { name: '', number: '' };
+    state = {
+        name: '',
+        number: '',
+    };
 
     handleChange = e => {
         const { name, value } = e.target;
@@ -18,7 +23,7 @@ class ContactForm extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
-        this.props.onSubmit(this.state);
+        this.props.dispSubmit(this.state);
 
         this.setState({ name: '', number: '' });
     };
@@ -58,4 +63,8 @@ class ContactForm extends Component {
     }
 }
 
-export default ContactForm;
+const mapDispatchToProps = dispatch => ({
+    dispSubmit: contact => dispatch(phonebookActions.addContact(contact)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);

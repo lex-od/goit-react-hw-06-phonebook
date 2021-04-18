@@ -1,8 +1,9 @@
 import actionTypes from './phonebook-types';
+import { v4 as uuid } from 'uuid';
 
 const addContact = contact => ({
     type: actionTypes.ADD_CONTACT,
-    payload: contact,
+    payload: { id: uuid(), ...contact },
 });
 
 const deleteContact = id => ({
