@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import css from './styles/Phonebook.module.scss';
-import phonebookActions from './redux/phonebook/phonebook-actions';
+import contactsActions from './redux/contacts/contactsActions';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
@@ -54,7 +54,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     dispLoadContacts: contacts =>
-        dispatch(phonebookActions.loadContacts(contacts)),
+        dispatch(contactsActions.loadContacts(contacts)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Phonebook);
