@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import actionTypes from './app-types';
+import actionTypes from './phonebook-types';
 
 const itemsReducer = (state = [], { type, payload }) => {
     switch (type) {

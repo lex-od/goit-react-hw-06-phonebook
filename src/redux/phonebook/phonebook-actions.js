@@ -1,4 +1,4 @@
-import actionTypes from './app-types';
+import actionTypes from './phonebook-types';
 
 export const addContact = contact => ({
     type: actionTypes.ADD_CONTACT,
