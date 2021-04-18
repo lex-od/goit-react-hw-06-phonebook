@@ -1,60 +1,61 @@
-import { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import css from './styles/Phonebook.module.scss';
-import contactsActions from './redux/contacts/contactsActions';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
 
-class Phonebook extends Component {
-    static propTypes = {
-        dispLoadContacts: PropTypes.func.isRequired,
-        contacts: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                name: PropTypes.string.isRequired,
-                number: PropTypes.string.isRequired,
-            }),
-        ).isRequired,
-    };
+const Phonebook = () => (
+    <div className="container">
+        <h1 className={css.telBookTitle}>Телефонная книга</h1>
+        <ContactForm />
 
-    componentDidMount() {
-        const savedContacts = JSON.parse(localStorage.getItem('contacts'));
-        if (savedContacts) {
-            this.props.dispLoadContacts(savedContacts);
-        }
-    }
+        <h2 className={css.contactsTitle}>Контакты</h2>
+        <Filter />
+        <ContactList />
+    </div>
+);
 
-    componentDidUpdate(prevProps) {
-        const { contacts } = this.props;
+export default Phonebook;
 
-        if (contacts !== prevProps.contacts) {
-            localStorage.setItem('contacts', JSON.stringify(contacts));
-        }
-    }
+// 📌 Альтернативная реализация localStorage
 
-    render() {
-        return (
-            <div className="container">
-                <h1 className={css.telBookTitle}>Телефонная книга</h1>
-                <ContactForm />
+// import { Component } from 'react';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import contactsActions from './redux/contacts/contactsActions';
 
-                <h2 className={css.contactsTitle}>Контакты</h2>
-                <Filter />
-                <ContactList />
-            </div>
-        );
-    }
-}
+// static propTypes = {
+//     dispLoadContacts: PropTypes.func.isRequired,
+//     contacts: PropTypes.arrayOf(
+//         PropTypes.shape({
+//             id: PropTypes.string.isRequired,
+//             name: PropTypes.string.isRequired,
+//             number: PropTypes.string.isRequired,
+//         }),
+//     ).isRequired,
+// };
 
-const mapStateToProps = state => ({
-    contacts: state.contacts.items,
-});
+// componentDidMount() {
+//     const savedContacts = JSON.parse(localStorage.getItem('contacts'));
+//     if (savedContacts) {
+//         this.props.dispLoadContacts(savedContacts);
+//     }
+// }
 
-const mapDispatchToProps = dispatch => ({
-    dispLoadContacts: contacts =>
-        dispatch(contactsActions.loadContacts(contacts)),
-});
+// componentDidUpdate(prevProps) {
+//     const { contacts } = this.props;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Phonebook);
+//     if (contacts !== prevProps.contacts) {
+//         localStorage.setItem('contacts', JSON.stringify(contacts));
+//     }
+// }
+
+// const mapStateToProps = state => ({
+//     contacts: state.contacts.items,
+// });
+
+// const mapDispatchToProps = dispatch => ({
+//     dispLoadContacts: contacts =>
+//         dispatch(contactsActions.loadContacts(contacts)),
+// });
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Phonebook);
